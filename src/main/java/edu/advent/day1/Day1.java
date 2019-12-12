@@ -43,7 +43,7 @@ import edu.advent.utils.InputLoader;
 public class Day1 {
 
     public static void main(String[] args) {
-        long[] input = InputLoader.getInputAsNumbers("day1");
+        long[] input = InputLoader.readLinesAsNumbers("day1");
         assert calculatePart1(input) == 3239503;
         assert calculatePart2(input) == 4856390;
     }

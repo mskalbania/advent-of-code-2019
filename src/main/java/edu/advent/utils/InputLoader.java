@@ -3,6 +3,7 @@ package edu.advent.utils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 public class InputLoader {
@@ -16,9 +17,15 @@ public class InputLoader {
         }
     }
 
-    public static long[] getInputAsNumbers(String name) {
+    public static long[] readLinesAsNumbers(String name) {
         return getInputAsStrings(name).stream()
                                       .mapToLong(Long::parseLong)
                                       .toArray();
+    }
+
+    public static long[] readComaSeparatedValues(String name) {
+        return Arrays.stream(getInputAsStrings(name).get(0).split(","))
+                     .mapToLong(Long::parseLong)
+                     .toArray();
     }
 }
