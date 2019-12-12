@@ -2,6 +2,8 @@ package edu.advent.day1;
 
 import edu.advent.utils.InputLoader;
 
+import java.util.function.Function;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /*      ---- Part One ----
@@ -52,28 +54,34 @@ public class Day1 {
         assertThat(calculatePart2(input)).isEqualTo(4856390);
     }
 
-    public static long calculatePart1(long[] input) {
+    private static long calculatePart1(long[] input) {
+        return calculateCommonPath(input, FuelCalculationStrategy::calculateOnlyFirst);
+    }
+
+    private static long calculatePart2(long[] input) {
+        return calculateCommonPath(input, FuelCalculationStrategy::calculateWithSubParts);
+    }
+
+    private static long calculateCommonPath(long[] input, Function<Long, Long> fuelCalculationStrategy) {
         long allRequiredFuel = 0;
         for (long n : input) {
-            long requiredFuel = (n / 3) - 2;
-            allRequiredFuel += requiredFuel;
+            allRequiredFuel += fuelCalculationStrategy.apply(n);
         }
         return allRequiredFuel;
     }
 
-    public static long calculatePart2(long[] input) {
-        long allRequiredFuel = 0;
-        for (long n : input) {
-            allRequiredFuel += calculateRequiredFuel(n);
-        }
-        return allRequiredFuel;
-    }
+    private static class FuelCalculationStrategy {
 
-    public static long calculateRequiredFuel(long mass) {
-        long requiredFuel = (mass / 3) - 2;
-        if ((requiredFuel < 0)) {
-            return 0;
+        static long calculateOnlyFirst(long mass) {
+            return (mass / 3) - 2;
         }
-        return requiredFuel + calculateRequiredFuel(requiredFuel);
+
+        static long calculateWithSubParts(long mass) {
+            long requiredFuel = (mass / 3) - 2;
+            if ((requiredFuel < 0)) {
+                return 0;
+            }
+            return requiredFuel + calculateWithSubParts(requiredFuel);
+        }
     }
 }
