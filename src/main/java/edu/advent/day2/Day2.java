@@ -6,6 +6,8 @@ import io.vavr.Tuple2;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /*      ---- Part One ----
         On the way to your gravity assist around the Moon, your ship computer beeps angrily about a "1202 program alarm". On the radio, an Elf is already explaining how to handle the situation: "Don't worry, that's perfectly norma--" The ship computer bursts into flames.
 
@@ -81,9 +83,13 @@ public class Day2 {
 
     public static void main(String[] args) {
         long[] input = InputLoader.readComaSeparatedValues("day2");
-        assert calculatePart1(input) == 3306701;
+
+        assertThat(calculatePart1(input)).isEqualTo(3306701);
+
         Tuple2<Integer, Integer> pair = calculatePart2(input);
-        assert (100 * pair._1) + pair._2 == 7621;
+        long answer2 = (100 * pair._1) + pair._2;
+
+        assertThat(answer2).isEqualTo(7621);
     }
 
     //L -> noun R -> verb

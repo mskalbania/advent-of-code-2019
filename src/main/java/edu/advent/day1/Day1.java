@@ -2,6 +2,8 @@ package edu.advent.day1;
 
 import edu.advent.utils.InputLoader;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /*      ---- Part One ----
         Santa has become stranded at the edge of the Solar System while delivering presents to other planets! To accurately calculate his position in space, safely align his warp drive, and return to Earth in time to save Christmas, he needs you to bring him measurements from fifty stars.
 
@@ -44,8 +46,10 @@ public class Day1 {
 
     public static void main(String[] args) {
         long[] input = InputLoader.readLinesAsNumbers("day1");
-        assert calculatePart1(input) == 3239503;
-        assert calculatePart2(input) == 4856390;
+
+        assertThat(calculatePart1(input)).isEqualTo(3239503);
+
+        assertThat(calculatePart2(input)).isEqualTo(4856390);
     }
 
     public static long calculatePart1(long[] input) {
